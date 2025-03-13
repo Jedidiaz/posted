@@ -27,3 +27,8 @@ export interface IUser {
   website: string;
   company: ICompany;
 }
+
+export interface INavigator {
+  label: string;
+  path: string;
+}
