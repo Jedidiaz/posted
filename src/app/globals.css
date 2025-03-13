@@ -8,8 +8,6 @@
   }
 }
 
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -66,13 +64,18 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border font-[family-name:var(--font-montserrat)] box-border;
   }
   body {
     @apply bg-background text-foreground bg-black overflow-x-hidden min-h-screen;
+  }
+}
+
+body, textarea {
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    background-color: #0c0c0c;
   }
 }

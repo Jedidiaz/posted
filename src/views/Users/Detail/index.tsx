@@ -62,7 +62,7 @@ const Detail = ({ initialData }: Props) => {
       </section>
       {/* Profile */}
       <section className="relative flex flex-col">
-        <header className="flex justify-start flex-col pt-10 px-4 relative ">
+        <header className="flex justify-start flex-col pt-10 px-4 relative">
           <picture className="bg-neutral-200 rounded-md min-w-36 min-h-36 absolute bottom-[62px] overflow-hidden ">
             <Image
               src="https://fastly.picsum.photos/id/944/500/500.jpg?hmac=v4PRAAuUQlDmy3UMkqoNz5mZ25xwCzxti-5RVgN23sI"
@@ -72,8 +72,10 @@ const Detail = ({ initialData }: Props) => {
               className="object-cover"
             />
           </picture>
-          <h3 className="font-bold text-xl line">{user.name}</h3>
-          <span className="text-sm text-neutral-500">{`@${user.name}`}</span>
+          <div className="w-full sticky top-0 bg-black/80 backdrop-blur-sm py-2 z-10">
+            <h3 className="font-bold text-xl line">{user.name}</h3>
+            <span className="text-sm text-neutral-500">{`@${user.username}`}</span>
+          </div>
         </header>
         <section className="px-4 mt-2 flex flex-col gap-2">
           <p className=" text-sm max-w-screen-sm">
@@ -103,7 +105,9 @@ const Detail = ({ initialData }: Props) => {
           ) : (
             <section className="px-4 flex flex-col gap-4">
               {posts &&
-                posts.map((post, index) => <Post post={post} user={user} />)}
+                posts.map((post, index) => (
+                  <Post key={index} post={post} user={user} />
+                ))}
             </section>
           )}
         </Suspense>

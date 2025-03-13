@@ -1,6 +1,7 @@
 import { IPost } from "@/interfaces/posts.interface";
 import { IUser } from "@/interfaces/user.interface";
 import { Heart, MessageCircle } from "lucide-react";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useMemo } from "react";
@@ -8,9 +9,12 @@ import React, { useMemo } from "react";
 interface Props {
   post: IPost;
   user: IUser;
+  isDetail?: boolean;
+  totalComments?: number;
 }
 
-const Post = ({ post, user }: Props) => {
+const Post = ({ post, user, isDetail, totalComments }: Props) => {
+  const router = useRouter();
   const dateNow = useMemo(() => {
     return new Date().toLocaleDateString("en-US", {
       month: "long",
@@ -19,9 +23,16 @@ const Post = ({ post, user }: Props) => {
     });
   }, []);
 
+  const handleNavigateToPost = () =>
+    !isDetail && router.push(`/posts/${post.id}`);
   return (
-    <article className="p-2">
-      <header className="flex gap-3 flex-wrap justify-start">
+    <article
+      className={`p-2 rounded-sm ease-out duration-200 ${
+        !isDetail && "hover:bg-neutral-50/5 cursor-pointer"
+      }`}
+      onClick={handleNavigateToPost}
+    >
+      <header className="flex gap-3 justify-start">
         <Image
           src="https://fastly.picsum.photos/id/944/500/500.jpg?hmac=v4PRAAuUQlDmy3UMkqoNz5mZ25xwCzxti-5RVgN23sI"
           alt="profile image"
@@ -35,10 +46,11 @@ const Post = ({ post, user }: Props) => {
             <span className="text-gray-100 text-base font-semibold">
               {user.name}
             </span>{" "}
-            {`@${user.username} · ${dateNow}`}
+            {`@${user.username} · `}
+            <time>{dateNow}</time>
           </span>
           {/* content */}
-          <p className="font-semibold text-md max-w-screen-sm">{post.title}</p>
+          <p className="text-md max-w-screen-sm">{post.title}</p>
           <p className="text-md max-w-screen-md mt-2">{post.body}</p>
         </section>
       </header>
@@ -48,10 +60,11 @@ const Post = ({ post, user }: Props) => {
           <Heart size={16} />
         </button>
         <Link
-          href={`/post/${post.id}`}
-          className="bg-neutral-50/15 p-2 rounded-full relative overflow-hidden transition-colors hover:bg-neutral-50/20"
+          href={`/posts/${post.id}`}
+          className="bg-neutral-50/15 p-2 rounded-full relative overflow-hidden transition-colors hover:bg-neutral-50/20 flex text-xs gap-2 ease-in-out duration-300"
         >
           <MessageCircle size={16} />
+          {totalComments && <span>{totalComments}</span>}
         </Link>
       </footer>
     </article>
