@@ -1,10 +1,10 @@
 "use client";
-import { getUserById } from "@/app/actions";
+import { getUserById, getUserPosts } from "@/app/actions";
 import Navigator from "@/components/layout/Navigator";
 import { IUser } from "@/interfaces/user.interface";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React, { Suspense, useMemo } from "react";
 import cover from "@/assets/cover-image.jpg";
 import {
   AtSign,
@@ -14,8 +14,10 @@ import {
   Phone,
 } from "lucide-react";
 import Tag from "@/components/layout/Tag";
+import LoadingPost from "@/components/layout/LoadingPost";
+import Post from "@/components/layout/Post";
 
-const NAVIGATORS = [{ label: "Usuarios", path: "/" }];
+const NAVIGATORS = [{ label: "Usuarios", path: "/users" }];
 
 interface Props {
   initialData: IUser;
@@ -25,7 +27,7 @@ const Detail = ({ initialData }: Props) => {
   const paths = useMemo(
     () => [
       ...NAVIGATORS,
-      { label: initialData.username, path: `/${initialData.id}` },
+      { label: initialData.username, path: `/users/${initialData.id}` },
     ],
     []
   );
@@ -36,6 +38,10 @@ const Detail = ({ initialData }: Props) => {
     initialData,
   });
 
+  const { data: posts, isLoading } = useQuery({
+    queryKey: ["users", initialData.id, "posts"],
+    queryFn: () => getUserPosts(String(initialData.id)),
+  });
 
   return (
     <main className="flex max-w-screen-lg m-auto w-ful flex-col gap-2 mt-6">
@@ -53,13 +59,13 @@ const Detail = ({ initialData }: Props) => {
             className="object-cover"
           />
         </picture>
-        {/* Profile */}
       </section>
+      {/* Profile */}
       <section className="relative flex flex-col">
         <header className="flex justify-start flex-col pt-10 px-4 relative ">
           <picture className="bg-neutral-200 rounded-md min-w-36 min-h-36 absolute bottom-[62px] overflow-hidden ">
             <Image
-              src="https://picsum.photos/500/500"
+              src="https://fastly.picsum.photos/id/944/500/500.jpg?hmac=v4PRAAuUQlDmy3UMkqoNz5mZ25xwCzxti-5RVgN23sI"
               alt="cover image"
               fill
               sizes="100%"
@@ -85,6 +91,22 @@ const Detail = ({ initialData }: Props) => {
             <Tag label={user.phone} Icon={Phone} />
           </div>
         </section>
+      </section>
+      {/* Posts */}
+      <section className="flex flex-col">
+        <header className="flex justify-between items-center px-4 py-2">
+          <h4 className="font-bold text-lg">Posts</h4>
+        </header>
+        <Suspense fallback={<LoadingPost />}>
+          {isLoading ? (
+            <LoadingPost />
+          ) : (
+            <section className="px-4 flex flex-col gap-4">
+              {posts &&
+                posts.map((post, index) => <Post post={post} user={user} />)}
+            </section>
+          )}
+        </Suspense>
       </section>
     </main>
   );

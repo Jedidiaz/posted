@@ -25,7 +25,7 @@ interface Props {
 }
 
 const TABLE_HEADERS = ["Id", "Nombre", "Email", "Teléfono"];
-const NAVIGATORS = [{ label: "Usuarios", path: "/" }];
+const NAVIGATORS = [{ label: "Usuarios", path: "/users" }];
 
 const Users = ({ initialData }: Props) => {
   const {
