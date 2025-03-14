@@ -41,8 +41,8 @@ Puedes ejecutar el proyecto de dos maneras: localmente con Node.js o mediante Do
 ### Opción 2: Usando Docker
 1. Asegúrate de tener Docker y Docker Compose instalados.
 2. Ejecuta el siguiente comando para levantar los contenedores:
-3. >[!NOTE]
-   >Asegurate de estar dentro de la carpeta del proyecto `cd posted`.
+>[!NOTE]
+>Asegurate de estar dentro de la carpeta del proyecto `cd posted`.
    ```sh
    docker-compose up --build
    ```
