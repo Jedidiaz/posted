@@ -15,7 +15,7 @@ export const generatePageMetadata = (tempMetadata: ITempMetadata): Metadata => {
       url: `https://posted.jedidiazfagundez.com`,
       type: "website",
       images: {
-        url: "social-media.jpg",
+        url: "https://posted.jedidiazfagundez.com/social-media.jpg",
         width: "1200",
         height: "630",
         alt: "Posted cover",
@@ -26,7 +26,7 @@ export const generatePageMetadata = (tempMetadata: ITempMetadata): Metadata => {
       title: tempMetadata.title,
       description: tempMetadata.description,
       images: {
-        url: "social-media.jpg",
+        url: "https://posted.jedidiazfagundez.com/social-media.jpg",
         width: "1200",
         height: "630",
       },
