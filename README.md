@@ -1,4 +1,4 @@
-[]("https://posted.jedidiazfagundez.com/social-media.jpg")
+![alt posted logo](https://posted.jedidiazfagundez.com/social-media.jpg)
 # Posted
 
 ## Descripción
