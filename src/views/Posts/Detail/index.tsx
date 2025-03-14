@@ -3,14 +3,14 @@ import { getCommentsByPostId } from "@/app/actions";
 import Comment from "@/components/layout/Comment";
 import LoadingComments from "@/components/layout/LoadingComments";
 import Post from "@/components/layout/Post";
-import { Textarea } from "@/components/ui/textarea";
 import { IPost } from "@/interfaces/posts.interface";
 import { IUser } from "@/interfaces/user.interface";
 import { useQuery } from "@tanstack/react-query";
-import { Send, SendHorizonal } from "lucide-react";
+import { ArrowLeft, Send } from "lucide-react";
 import React, { ChangeEvent, Suspense, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next-nprogress-bar";
 
 interface Props {
   user: IUser;
@@ -22,6 +22,7 @@ const PostDetail = ({ post, user }: Props) => {
     queryKey: ["posts", post.id, "comments"],
     queryFn: () => getCommentsByPostId(String(post.id)),
   });
+  const router = useRouter();
 
   const [commentState, setCommentState] = React.useState({
     comments: comments ?? [],
@@ -53,6 +54,8 @@ const PostDetail = ({ post, user }: Props) => {
     }));
   };
 
+  const handleBack = () => router.back();
+
   useEffect(() => {
     setCommentState((prev) => ({ ...prev, comments: comments ?? [] }));
   }, [comments]);
@@ -65,7 +68,15 @@ const PostDetail = ({ post, user }: Props) => {
   }, [commentState.comments]);
 
   return (
-    <main className="max-w-screen-md m-auto px-4 mt-10 relative">
+    <main className="max-w-screen-md m-auto px-4 mt-4 relative">
+      <header className="w-full sticky top-0 bg-black/80 backdrop-blur-sm py-2 z-10">
+        <button
+          className="bg-neutral-50/5 p-2 rounded-full relative overflow-hidden transition-colors hover:bg-neutral-50/20"
+          onClick={handleBack}
+        >
+          <ArrowLeft size={16} />
+        </button>
+      </header>
       <Post post={post} user={user} isDetail totalComments={comments?.length} />
       <Suspense fallback={<LoadingComments />}>
         {isLoading ? (

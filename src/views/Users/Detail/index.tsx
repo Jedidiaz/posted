@@ -44,7 +44,7 @@ const Detail = ({ initialData }: Props) => {
   });
 
   return (
-    <main className="flex max-w-screen-lg m-auto w-ful flex-col gap-2 mt-6">
+    <main className="flex max-w-screen-md m-auto w-ful flex-col gap-2 mt-6">
       <header className="flex flex-col gap-3 px-4">
         <Navigator paths={paths} />
       </header>

@@ -39,12 +39,17 @@ const Post = ({ post, user, isDetail, totalComments }: Props) => {
           className="object-cover bg-neutral-100 rounded-sm max-w-10 max-h-10"
           width={40}
           height={40}
-          priority
+          loading="lazy"
         />
         <section className="block">
           <span className="text-gray-500 text-sm">
-            <span className="text-gray-100 text-base font-semibold">
-              {user.name}
+            <span className="text-gray-100 text-base font-semibold relative z-10">
+              <Link
+                href={`/users/${user.id}`}
+                className="hover:text-lime-200 hover:underline"
+              >
+                {user.name}
+              </Link>
             </span>{" "}
             {`@${user.username} · `}
             <time>{dateNow}</time>
