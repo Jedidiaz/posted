@@ -123,9 +123,6 @@ manejar datos (por ej. fetch de usuarios), ¿qué mejora principal obtenemos?
 - ¿Cuál de estas afirmaciones sobre ShadCN es cierta?
 (A) Es una colección de componentes (como botones, modales, etc.) creada para React, con énfasis en accesibilidad y personalización.
 
-## Contacto
-Si tienes preguntas o sugerencias, contáctame en [tu email o red social].
-
 ---
 
 ¡Gracias por revisar este proyecto! 🚀
