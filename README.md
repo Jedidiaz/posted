@@ -13,7 +13,7 @@ Este proyecto es una aplicación web construida con Next.js 14, React 18 y TypeS
 - **Tailwind CSS** para estilos
 
 ## Instalación y Configuración
-Puedes ejecutar el proyecto de dos maneras: localmente con Node.js o mediante Docker.
+Puedes ejecutar el proyecto de dos maneras: localmente con Node.js o mediante Docker (Recomendado).
 
 ### Opción 1: Instalación Local
 1. Clona el repositorio:
