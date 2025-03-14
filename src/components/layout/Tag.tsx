@@ -21,6 +21,7 @@ const Tag = ({ Icon, label, link = false }: Props) => {
     return `https://${label}`;
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const url = useMemo(() => accessLink(), []);
 
   return (

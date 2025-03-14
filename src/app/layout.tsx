@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Providers from "@/providers/Providers";
+import { generatePageMetadata } from "@/utils/metadata";
 
 const montserrat = localFont({
   src: "./fonts/Montserrat-VariableFont_wght.ttf",
@@ -21,10 +22,12 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Posted",
-  description: "",
-};
+export const generateMetadata = (): Metadata =>
+  generatePageMetadata({
+    title: "Posted",
+    description:
+      "Explora y descubre una variedad de publicaciones de diferentes usuarios. Mantente al día con el contenido más reciente y participa en la comunidad.",
+  });
 
 export default function RootLayout({
   children,
@@ -32,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${montserrat.variable} ${geistSans.variable} ${geistMono.variable} antialiased text-gray-100`}
       >
