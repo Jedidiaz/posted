@@ -32,6 +32,7 @@ const Users = ({ initialData }: Props) => {
     data: allUsers,
     refetch,
     isLoading,
+    isFetching
   } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
@@ -105,7 +106,7 @@ const Users = ({ initialData }: Props) => {
             aria-label="Refresh"
             disabled={isLoading}
           >
-            <RotateCw className={`${isLoading ? "animate-spin" : ""}`} />
+            <RotateCw className={`${isFetching ? "animate-spin" : ""}`} />
           </Button>
         </section>
       </header>

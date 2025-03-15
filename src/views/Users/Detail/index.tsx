@@ -99,18 +99,16 @@ const Detail = ({ initialData }: Props) => {
         <header className="flex justify-between items-center px-4 py-2">
           <h4 className="font-bold text-lg">Posts</h4>
         </header>
-        <Suspense fallback={<LoadingPost />}>
-          {isLoading ? (
-            <LoadingPost />
-          ) : (
-            <section className="px-4 flex flex-col gap-4">
-              {posts &&
-                posts.map((post, index) => (
-                  <Post key={index} post={post} user={user} />
-                ))}
-            </section>
-          )}
-        </Suspense>
+        {isLoading ? (
+          <LoadingPost />
+        ) : (
+          <section className="px-4 flex flex-col gap-4">
+            {posts &&
+              posts.map((post, index) => (
+                <Post key={index} post={post} user={user} />
+              ))}
+          </section>
+        )}
       </section>
     </main>
   );

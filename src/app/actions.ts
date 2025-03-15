@@ -2,8 +2,11 @@ import instance from "@/api/instance";
 import { IComment, IPost } from "@/interfaces/posts.interface";
 import { IUser } from "@/interfaces/user.interface";
 
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 //users
 export const getUsers = async () => {
+  await delay(1000);
   const { data } = await instance.get<IUser[]>("users");
   return data;
 };
